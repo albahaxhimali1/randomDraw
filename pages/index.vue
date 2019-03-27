@@ -1,5 +1,6 @@
 <template>
   <div class="all-persons-container">
+    <register-players v-show="registering"></register-players>
     <div class="button-holder">
       <button @click="randomPersons">Start</button>
     </div>
@@ -23,15 +24,15 @@
   import _ from 'lodash';
   import { mapState } from 'vuex';
   import PlayerComponent from '@/components/player';
+  import RegisterPlayers from '@/components/registerPlayers';
 
   export default {
     components: {
-      PlayerComponent
+      PlayerComponent,
+      RegisterPlayers
     },
     computed: {
-      ...mapState({
-        players: state => state.players
-      })
+      ...mapState(['players', 'registering'])
     },
     data () {
       return {
@@ -58,3 +59,29 @@
     }
   }
 </script>
+<style lang="scss">
+  .button-holder {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      background: #3989c6;
+      color: #f7f8fb;
+      border-radius: 8px;
+      border: none;
+      padding: 10px 35px;
+      outline: none;
+      cursor: pointer;
+      -webkit-transition: all .3s;
+      -moz-transition: all .5s;
+      -ms-transition: all .5s;
+      -o-transition: all .5s;
+      transition: all .5s;
+
+      &:hover {
+        background: darken(#3989c6, 10%);
+      }
+    }
+  }
+</style>

@@ -6,26 +6,6 @@
   align-items: center;
   padding: 25px;
 
-  .button-holder {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-
-    button {
-      background: #1B1B1B;
-      color: #f7f8fb;
-      border-radius: 8px;
-      border: none;
-      padding: 10px 35px;
-      outline: none;
-      cursor: pointer;
-
-      &:hover {
-        background: lighten(#1B1B1B, 10%);
-      }
-    }
-  }
-
   .names-container {
     width: 50%;
     display: flex;
@@ -33,41 +13,6 @@
     flex-wrap: wrap;
     align-items: center;
     background: #FCBA4A;
-
-    .persons-container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-
-      .names-holder {
-        display: flex;
-        justify-content: space-evenly;
-        flex-wrap: wrap;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 20px;
-
-        .name-wrapper {
-          width: 200px;
-          padding: 10px 0;
-          background: #e7503b;
-          color: #fff;
-          font-size: 18px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          border-radius: 12px;
-          font-weight: bold;
-          border: 4px solid #353944;
-        }
-
-        h2 {
-          font-size: 30px;
-          color: #1B1B1B;
-        }
-      }
-    }
   }
 
   .versus-container {
