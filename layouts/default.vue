@@ -1,8 +1,25 @@
 <template>
   <div>
+    <menu-component></menu-component>
     <nuxt />
   </div>
 </template>
+
+<script type="text/babel">
+  import menuComponent from '@/components/sideMenu'
+
+  export default {
+    components: { menuComponent },
+
+    watch: {
+      $route () {
+        const bodyStyle = document.getElementsByTagName("BODY")[0].style;
+        if(bodyStyle.overflow === 'hidden')
+          bodyStyle.overflow = 'auto'
+      }
+    }
+  }
+</script>
 
 <style>
   html {
