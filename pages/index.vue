@@ -3,21 +3,19 @@
     <div class="button-holder">
       <button @click="randomPersons">Start</button>
     </div>
-    <transition-group name="flip-list" tag="ul">
-    </transition-group>
     <div class="names-container">
-      <transition-group name="flip-list" tag="ul">
-        <div class="persons-container" v-for="person in persons" :key="person.id">
-          <div class="names-holder">
-            <div class="name-wrapper" :style="{backgroundColor: person.selected ? '#bdc3c7' : ''}">{{person.name}}</div>
-          </div>
+      <div class="persons-container" v-for="person in persons" :key="person.id">
+        <div class="names-holder">
+          <div class="name-wrapper" :style="{backgroundColor: person.selected ? '#bdc3c7' : ''}">{{person.name}}</div>
         </div>
-      </transition-group>
+      </div>
     </div>
     <div class="names-holder versus-container">
-      <div class="name-wrapper">{{this.firstRandomPerson.name}}</div>
-      <h2>VS</h2>
-      <div class="name-wrapper">{{this.secondRandomPerson.name}}</div>
+      <div class="versus-holder">
+        <div class="name-wrapper">{{this.firstRandomPerson.name}}</div>
+        <h2>VS</h2>
+        <div class="name-wrapper">{{this.secondRandomPerson.name}}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -82,11 +80,7 @@
           this.secondRandomPerson = clonedPersons[randomIndex2];
           personIndex = this.persons.findIndex(el => el.id === this.secondRandomPerson.id);
           this.persons[personIndex].selected = true;
-          this.shuffle()
         }
-      },
-      shuffle () {
-        this.persons = _.shuffle(this.persons)
       }
     }
   }
