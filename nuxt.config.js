@@ -27,7 +27,8 @@ export default {
   ** Global CSS
   */
   css: [
-    '@/assets/sass/objects.scss'
+    '@/assets/sass/objects.scss',
+    '@/assets/sass/transition.scss'
   ],
 
   /*

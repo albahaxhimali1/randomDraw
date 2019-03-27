@@ -3,13 +3,16 @@
     <div class="button-holder">
       <button @click="randomPersons">Start</button>
     </div>
-
+    <transition-group name="flip-list" tag="ul">
+    </transition-group>
     <div class="names-container">
-      <div class="persons-container" v-for="person in persons">
-        <div class="names-holder">
-          <div class="name-wrapper" :style="{backgroundColor: person.selected ? '#bdc3c7' : ''}">{{person.name}}</div>
+      <transition-group name="flip-list" tag="ul">
+        <div class="persons-container" v-for="person in persons" :key="person.id">
+          <div class="names-holder">
+            <div class="name-wrapper" :style="{backgroundColor: person.selected ? '#bdc3c7' : ''}">{{person.name}}</div>
+          </div>
         </div>
-      </div>
+      </transition-group>
     </div>
     <div class="names-holder versus-container">
       <div class="name-wrapper">{{this.firstRandomPerson.name}}</div>
@@ -19,6 +22,7 @@
   </div>
 </template>
 <script>
+  import _ from 'lodash'
   export default {
     data () {
       return {
@@ -28,7 +32,7 @@
             selected: false
           },
           {  id: 2,
-            name: 'Ajmar',
+            name: 'Xhuljo',
             selected: false
           },
           {  id: 3,
@@ -78,7 +82,11 @@
           this.secondRandomPerson = clonedPersons[randomIndex2];
           personIndex = this.persons.findIndex(el => el.id === this.secondRandomPerson.id);
           this.persons[personIndex].selected = true;
+          this.shuffle()
         }
+      },
+      shuffle () {
+        this.persons = _.shuffle(this.persons)
       }
     }
   }
