@@ -6,14 +6,20 @@ export const state = () => ({
   registering: true
 });
 
+
+
 export const mutations = {
   addNewPlayer (state, player) {
-    player.id = Helper.generateUUID()
+    player.id = Helper.generateUUID();
     state.players = [
       ...state.players,
       player
     ];
   },
+  setSelectedPlayer (state, personIndex) {
+    state.players[personIndex].selected = true;
+  },
+
   finishRegister (state) {
     state.registering = false
   }

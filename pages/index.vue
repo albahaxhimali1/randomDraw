@@ -21,8 +21,7 @@
   </div>
 </template>
 <script>
-  import _ from 'lodash';
-  import { mapState } from 'vuex';
+  import { mapState, mapMutations } from 'vuex';
   import PlayerComponent from '@/components/player';
   import RegisterPlayers from '@/components/registerPlayers';
 
@@ -41,19 +40,22 @@
       }
     },
     methods: {
+      ...mapMutations({
+        setSelectedPlayer: 'setSelectedPlayer',
+      }),
       randomPersons() {
         let clonedPersons = this.players.filter(item => item.selected === false)
         if (clonedPersons.length > 1) {
           const randomIndex1 = Math.floor(Math.random() * clonedPersons.length);
           this.firstRandomPerson = clonedPersons[randomIndex1];
           let personIndex = this.players.findIndex(el => el.id === this.firstRandomPerson.id);
-          this.players[personIndex].selected = true;
+          this.setSelectedPlayer(personIndex);
 
           clonedPersons = this.players.filter(item => item.selected === false)
           const randomIndex2 = Math.floor(Math.random() * clonedPersons.length);
           this.secondRandomPerson = clonedPersons[randomIndex2];
           personIndex = this.players.findIndex(el => el.id === this.secondRandomPerson.id);
-          this.players[personIndex].selected = true;
+          this.setSelectedPlayer(personIndex);
         }
       }
     }
