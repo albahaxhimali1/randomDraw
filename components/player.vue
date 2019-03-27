@@ -1,12 +1,11 @@
 <template>
   <div class="persons-container player">
     <div class="names-holder">
-      <div class="name-wrapper">
+      <div class="name-wrapper" :style="{backgroundColor: player.selected ? '#bdc3c7' : ''}">
         <img src="~/static/star-solid.svg" alt="star-solid-fontawesome" class="star-player">
         {{player.name}}
         <img src="~/static/star-solid.svg" alt="star-solid-fontawesome" class="star-player">
       </div>
-      <!--<div class="name-wrapper" :style="{backgroundColor: person.selected ? '#bdc3c7' : ''}">{{person.name}}</div>-->
     </div>
   </div>
 </template>
