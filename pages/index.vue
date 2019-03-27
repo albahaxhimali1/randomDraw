@@ -4,11 +4,11 @@
       <button @click="randomPersons">Start</button>
     </div>
     <div class="names-container">
-      <div class="persons-container" v-for="person in persons" :key="person.id">
-        <div class="names-holder">
-          <div class="name-wrapper" :style="{backgroundColor: person.selected ? '#bdc3c7' : ''}">{{person.name}}</div>
-        </div>
-      </div>
+      <player-component
+        v-for="(player, index) in players"
+        :key="`${player.id}-${index}`"
+        :player="player"
+      ></player-component>
     </div>
     <div class="names-holder versus-container">
       <div class="versus-holder">
@@ -20,66 +20,39 @@
   </div>
 </template>
 <script>
-  import _ from 'lodash'
+  import _ from 'lodash';
+  import { mapState } from 'vuex';
+  import PlayerComponent from '@/components/player';
+
   export default {
+    components: {
+      PlayerComponent
+    },
+    computed: {
+      ...mapState({
+        players: state => state.players
+      })
+    },
     data () {
       return {
-        persons: [
-          {  id: 1,
-            name: 'Alba',
-            selected: false
-          },
-          {  id: 2,
-            name: 'Xhuljo',
-            selected: false
-          },
-          {  id: 3,
-            name: 'Kristina',
-            selected: false
-          },
-          {  id: 4,
-            name: 'Gersi',
-            selected: false
-          },
-          {  id: 5,
-            name: 'Valdio',
-            selected: false
-          },
-          {  id: 6,
-            name: 'Eni',
-            selected: false
-          },
-          {  id: 7,
-            name: 'Ergi',
-            selected: false
-          },
-          {  id: 8,
-            name: 'Erisa',
-            selected: false
-          },
-          {  id: 9,
-            name: 'Benn',
-            selected: false
-          }
-        ],
         firstRandomPerson: '',
         secondRandomPerson: ''
       }
     },
     methods: {
       randomPersons() {
-        let clonedPersons = this.persons.filter(item => item.selected === false)
+        let clonedPersons = this.players.filter(item => item.selected === false)
         if (clonedPersons.length > 1) {
           const randomIndex1 = Math.floor(Math.random() * clonedPersons.length);
           this.firstRandomPerson = clonedPersons[randomIndex1];
-          let personIndex = this.persons.findIndex(el => el.id === this.firstRandomPerson.id);
-          this.persons[personIndex].selected = true;
+          let personIndex = this.players.findIndex(el => el.id === this.firstRandomPerson.id);
+          this.players[personIndex].selected = true;
 
-          clonedPersons = this.persons.filter(item => item.selected === false)
+          clonedPersons = this.players.filter(item => item.selected === false)
           const randomIndex2 = Math.floor(Math.random() * clonedPersons.length);
           this.secondRandomPerson = clonedPersons[randomIndex2];
-          personIndex = this.persons.findIndex(el => el.id === this.secondRandomPerson.id);
-          this.persons[personIndex].selected = true;
+          personIndex = this.players.findIndex(el => el.id === this.secondRandomPerson.id);
+          this.players[personIndex].selected = true;
         }
       }
     }
